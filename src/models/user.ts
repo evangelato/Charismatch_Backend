@@ -3,6 +3,7 @@ import jwt = require('jsonwebtoken');
 import Joi = require('joi');
 import mongoose = require('mongoose');
 import mongodb = require('mongodb');
+import { ValidationResult } from 'joi';
 
 interface UserType {
     name: string;
@@ -42,14 +43,14 @@ const userSchema = new mongoose.Schema({
     isAdmin: Boolean,
 });
 
-userSchema.methods.generateAuthToken = function () {
+userSchema.methods.generateAuthToken = function (): string {
     const token = jwt.sign({ _id: this._id, isAdmin: this.isAdmin }, config.get('jwtPrivateKey'));
     return token;
 };
 
 const User = mongoose.model<UserInterface>('User', userSchema);
 
-const validateUser = (user: UserType) => {
+const validateUser = (user: UserType): ValidationResult<UserType> => {
     const schema = {
         name: Joi.string().min(5).max(50).required(),
         username: Joi.string().min(5).max(255).required(),

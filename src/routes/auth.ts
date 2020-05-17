@@ -2,15 +2,15 @@ import Joi = require('joi');
 import bcrypt = require('bcrypt');
 import { User } from '../models/user';
 import express = require('express');
+import { ValidationResult } from 'joi';
 
 const router = express.Router();
 
-const validate = (req: express.Request) => {
+const validate = (req: express.Request): ValidationResult<express.Request> => {
     const schema = {
         username: Joi.string().min(5).max(255).required(),
         password: Joi.string().min(5).max(255).required(),
     };
-
     return Joi.validate(req, schema);
 };
 
