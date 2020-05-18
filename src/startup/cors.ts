@@ -1,12 +1,7 @@
 import express = require('express');
 import cors = require('cors');
 
-const allowedOrigins = [
-    'http://localhost:3000',
-    'https://thehongpage-frontend.herokuapp.com',
-    'https://thehongpage.com',
-    'https://www.thehongpage.com',
-];
+const allowedOrigins = ['http://localhost:3000'];
 
 const corsSetting = (app: express.Application): void => {
     app.use(

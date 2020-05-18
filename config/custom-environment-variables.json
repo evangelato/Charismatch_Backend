@@ -1,0 +1,4 @@
+{
+    "jwtPrivateKey": "charismatch_jwtPrivateKey",
+    "db": "MONGODB_URI"
+}
